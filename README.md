@@ -24,25 +24,34 @@ O modelo de dados foi desenvolvido utilizando o diagrama ER em formato MERMAID, 
 
 ```mermaid
 erDiagram
+    PESSOA {
+        int id_pessoa PK
+        string nome
+        string documento
+        string telefone
+    }
+
     ATENDENTE {
         int id_atendente PK
-        string nome
+        int id_pessoa FK
         string setor
         string status
     }
 
     CLIENTE {
         int id_cliente PK
-        string nome
-        string documento
-        string telefone
+        int id_pessoa FK
     }
 
     FILA {
         int id_fila PK
         string nome
-        string prioridade
         string status
+    }
+
+    PRIORIDADE {
+        int id_prioridade PK
+        string descricao
     }
 
     ATENDIMENTO {
@@ -53,9 +62,14 @@ erDiagram
         int id_atendente FK
         int id_cliente FK
         int id_fila FK
+        int id_prioridade FK
     }
 
+    PESSOA ||--|| ATENDENTE : possui
+    PESSOA ||--|| CLIENTE : possui
     ATENDENTE ||--o{ ATENDIMENTO : realiza
     CLIENTE ||--o{ ATENDIMENTO : solicita
     FILA ||--o{ ATENDIMENTO : organiza
+    PRIORIDADE ||--o{ ATENDIMENTO : classifica
+
 ```
