@@ -131,39 +131,32 @@ Regras de negócio avançadas e implementação da aplicação não fazem parte 
 
 ```mermaid
 erDiagram
+
     PESSOA {
         int id_pessoa PK
         string nome
-        string documento
+        string cpf
         string telefone
+        boolean cadastro_completo
     }
 
-    ACCOUNT {
-        int id_account PK
+    USUARIO {
+        int id_usuario PK
         int id_pessoa FK
         string email
         string senha_hash
-        boolean email_confirmado
-    }
-
-    EMAIL_VERIFICACAO {
-        int id_verificacao PK
-        int id_account FK
-        string codigo
-        datetime expiracao
-        boolean utilizado
+        boolean email_verificado
+        datetime data_criacao
     }
 
     CLIENTE {
         int id_cliente PK
         int id_pessoa FK
-        datetime data_cadastro
     }
 
     ATENDENTE {
         int id_atendente PK
         int id_pessoa FK
-        string matricula
         string setor
         string status
     }
@@ -177,49 +170,43 @@ erDiagram
     PRIORIDADE {
         int id_prioridade PK
         string descricao
+        int nivel
     }
 
-    TIME_SLOT {
-        int id_slot PK
+    AGENDAMENTO {
+        int id_agendamento PK
+        int id_cliente FK
         int id_fila FK
-        datetime data_hora_inicio
-        datetime data_hora_fim
-        int capacidade
+        int id_prioridade FK
+        datetime data_hora_agendada
+        string status
     }
 
     ATENDIMENTO {
         int id_atendimento PK
-        datetime data_hora_inicio
-        datetime data_hora_fim
-        string status
         int id_cliente FK
         int id_atendente FK
         int id_fila FK
         int id_prioridade FK
-    }
-
-    BOOKING {
-        int id_booking PK
-        int id_slot FK
-        int id_cliente FK
-        int id_atendimento FK
+        int id_agendamento FK
+        datetime data_hora_inicio
+        datetime data_hora_fim
         string status
     }
 
     %% Relacionamentos
 
-    PESSOA ||--o{ ACCOUNT : possui
-    ACCOUNT ||--o{ EMAIL_VERIFICACAO : confirma
+    PESSOA ||--|| USUARIO : possui
+    PESSOA ||--o| CLIENTE : pode_ser
+    PESSOA ||--o| ATENDENTE : pode_ser
 
-    PESSOA ||--|| CLIENTE : pode_ser
-    PESSOA ||--|| ATENDENTE : pode_ser
+    CLIENTE ||--o{ AGENDAMENTO : solicita
+    FILA ||--o{ AGENDAMENTO : organiza
+    PRIORIDADE ||--o{ AGENDAMENTO : classifica
 
-    CLIENTE ||--o{ BOOKING : agenda
-    FILA ||--o{ TIME_SLOT : disponibiliza
-    TIME_SLOT ||--o{ BOOKING : reserva
-
-    CLIENTE ||--o{ ATENDIMENTO : solicita
+    CLIENTE ||--o{ ATENDIMENTO : recebe
     ATENDENTE ||--o{ ATENDIMENTO : realiza
     FILA ||--o{ ATENDIMENTO : organiza
     PRIORIDADE ||--o{ ATENDIMENTO : classifica
+    AGENDAMENTO ||--o| ATENDIMENTO : origina
 ```
