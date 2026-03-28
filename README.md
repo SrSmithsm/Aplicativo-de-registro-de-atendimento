@@ -1,131 +1,131 @@
-# Aplicativo de Registro de Atendimento
+# Sistema de Gerenciamento de Atendimento
 
 ## Sobre o Projeto
 
-Este projeto apresenta um modelo de banco de dados para um sistema de gerenciamento de atendimentos com cadastro seguro, agendamento prévio e controle de filas. A proposta é permitir que organizações organizem o atendimento ao público de forma estruturada, evitando duplicidade de usuários e mantendo controle sobre prioridades e histórico de atendimentos.
+Este projeto consiste na modelagem de um banco de dados relacional para um sistema de gerenciamento de atendimentos, com foco na organização de filas, agendamentos e controle completo do ciclo de atendimento.
 
-O sistema foi projetado com foco em segurança no cadastro, organização de horários e flexibilidade de papéis, permitindo que uma mesma pessoa atue como cliente, atendente ou ambos.
+A proposta evolui de um modelo básico para uma estrutura mais próxima de sistemas reais, incluindo controle de horários, check-in, geração de senhas, notificações e métricas de desempenho.
 
 ---
 
 ## Objetivo
 
-Estruturar um banco de dados relacional que sirva como base para o desenvolvimento de um sistema de agendamento e registro de atendimentos, contemplando:
+Desenvolver uma base de dados robusta capaz de suportar:
 
-* Cadastro seguro de usuários
-* Evitar duplicidade de pessoas
-* Agendamento por data e horário
-* Controle de fila única com prioridades
-* Registro completo dos atendimentos realizados
-
----
-
-## Fluxo do Sistema
-
-O sistema segue o seguinte fluxo de utilização:
-
-### 1. Cadastro Inicial
-
-O usuário realiza um cadastro simples informando:
-
-* Email
-* Senha
-
-### 2. Verificação de Email
-
-* Um código de verificação é enviado para o email informado
-* O usuário deve confirmar o código
-* Um captcha é utilizado para validação anti-robô
-
-Após a confirmação, o acesso ao sistema é liberado.
-
-### 3. Completar Cadastro
-
-Dentro do sistema, o usuário informa seus dados pessoais, como:
-
-* Nome
-* CPF ou documento
-* Telefone
-
-Essas informações são armazenadas na entidade **Pessoa**.
-
-### 4. Definição de Perfil
-
-A mesma pessoa pode assumir um ou mais papéis:
-
-* Cliente
-* Atendente
-
-Isso evita duplicidade de dados e permite maior flexibilidade no sistema.
-
-### 5. Agendamento
-
-O cliente seleciona:
-
-* Data disponível
-* Horário disponível
-
-O agendamento é registrado e vinculado a um horário específico.
-
-### 6. Atendimento
-
-No momento do atendimento:
-
-* Um atendente realiza o serviço
-* O atendimento é registrado no sistema
-* Pode ser definida uma prioridade para organização da fila
+- Cadastro seguro de usuários  
+- Evitar duplicidade de pessoas  
+- Agendamento com controle de horários disponíveis  
+- Gerenciamento de filas com prioridade  
+- Registro completo dos atendimentos  
+- Avaliação de serviços prestados  
+- Geração de métricas e estimativas de atendimento  
 
 ---
 
-## Modelo de Usuários
+## Funcionalidades
 
-O sistema utiliza uma estrutura centralizada:
+### Gestão de Usuários
+- Cadastro com autenticação (email e senha)  
+- Verificação de email  
+- Associação com dados pessoais (Pessoa)  
+- Suporte a múltiplos papéis (Cliente e Atendente)  
 
-* **Pessoa**: armazena os dados principais
-* **Cliente**: identifica a pessoa como solicitante de atendimento
-* **Atendente**: identifica a pessoa como responsável pelo atendimento
+### Agendamento
+- Seleção de fila de atendimento  
+- Escolha de horários disponíveis  
+- Controle de ocupação de horários  
+- Organização por prioridade  
 
-Uma mesma pessoa pode ser cliente e atendente simultaneamente.
+### Check-in
+- Confirmação de presença antes do atendimento  
+- Controle de faltas (no-show)  
+
+### Atendimento
+- Registro de início e fim do atendimento  
+- Associação com cliente e atendente  
+- Classificação por prioridade  
+
+### Fila em Tempo Real
+- Geração de senhas  
+- Controle de chamadas  
+- Simulação de ambientes reais de atendimento  
+
+### Avaliação
+- Avaliação do atendimento pelo cliente  
+- Registro de notas e comentários  
+
+### Notificações
+- Envio de notificações para usuários  
+- Confirmações, lembretes e atualizações de status  
+
+### Métricas e Monitoramento
+- Estimativa de tempo médio por fila  
+- Histórico de alterações de status  
+- Base para análise de desempenho  
 
 ---
 
-## Controle de Fila
+## Modelagem
 
-* O sistema utiliza **fila única**
-* Cada atendimento pode possuir um nível de **prioridade**
-* A organização da fila considera:
+O sistema utiliza uma estrutura centralizada baseada na entidade **Pessoa**, evitando duplicidade de dados.
 
-  * Data e horário do agendamento
-  * Nível de prioridade
+Uma mesma pessoa pode assumir múltiplos papéis:
 
----
-
-## Estrutura do Banco de Dados
-
-O modelo foi desenvolvido utilizando diagrama ER em formato **MERMAID**, contendo as seguintes entidades principais:
-
-* Account (conta de acesso)
-* Verificação de Email
-* Pessoa
-* Cliente
-* Atendente
-* Fila
-* Prioridade
-* Horários disponíveis
-* Agendamentos
-* Atendimentos realizados
+- Cliente  
+- Atendente  
+- Usuário (autenticação)  
 
 ---
 
-## Escopo do Projeto
+## Estrutura do Banco
 
-Nesta etapa, o projeto contempla:
+Principais entidades:
 
-* Modelagem do banco de dados
-* Estrutura de entidades e relacionamentos
-* Definição do fluxo principal do sistema
+- Pessoa  
+- Usuário  
+- Cliente  
+- Atendente  
+- Fila  
+- Prioridade  
+- Horário Disponível  
+- Agendamento  
+- Atendimento  
+- Check-in  
+- Avaliação  
+- Senha  
+- Notificação  
+- Estimativa de Atendimento  
+- Histórico de Status  
 
-Regras de negócio avançadas e implementação da aplicação não fazem parte do escopo atual.
+---
+
+## Tecnologias
+
+- Modelagem: Mermaid (ER Diagram)  
+- Banco de Dados: PostgreSQL  
+- Ferramenta: pgAdmin  
+
+---
+
+## Status do Projeto
+
+Estrutura concluída:
+- Modelagem completa do banco de dados  
+- Implementação em SQL  
+- Pronto para testes no pgAdmin  
+
+Possíveis evoluções:
+- Inserção de dados para simulação  
+- Criação de queries analíticas  
+- Desenvolvimento de aplicação (backend/frontend)  
+
+---
+
+## Observações
+
+Este projeto possui caráter acadêmico, com foco no aprendizado de modelagem de dados e simulação de sistemas reais.
+
+A estrutura foi desenvolvida seguindo boas práticas de organização e integridade relacional.
 
 
 
@@ -138,6 +138,7 @@ erDiagram
         string cpf
         string telefone
         boolean cadastro_completo
+        boolean ativo
     }
 
     USUARIO {
@@ -164,13 +165,28 @@ erDiagram
     FILA {
         int id_fila PK
         string nome
+        string tipo_servico
         string status
+    }
+
+    ATENDENTE_FILA {
+        int id_atendente FK
+        int id_fila FK
     }
 
     PRIORIDADE {
         int id_prioridade PK
         string descricao
         int nivel
+        float peso_tempo_espera
+    }
+
+    HORARIO_DISPONIVEL {
+        int id_horario PK
+        int id_fila FK
+        datetime inicio
+        datetime fim
+        boolean ocupado
     }
 
     AGENDAMENTO {
@@ -178,8 +194,15 @@ erDiagram
         int id_cliente FK
         int id_fila FK
         int id_prioridade FK
-        datetime data_hora_agendada
+        int id_horario FK
         string status
+    }
+
+    CHECKIN {
+        int id_checkin PK
+        int id_agendamento FK
+        datetime horario_checkin
+        boolean confirmado
     }
 
     ATENDIMENTO {
@@ -194,19 +217,74 @@ erDiagram
         string status
     }
 
-    %% Relacionamentos
+    AVALIACAO {
+        int id_avaliacao PK
+        int id_atendimento FK
+        int nota
+        string comentario
+    }
+
+    SENHA {
+        int id_senha PK
+        int id_fila FK
+        int id_agendamento FK
+        int numero
+        datetime chamada_em
+        string status
+    }
+
+    NOTIFICACAO {
+        int id_notificacao PK
+        int id_usuario FK
+        string tipo
+        string mensagem
+        boolean lida
+        datetime enviada_em
+    }
+
+    ESTIMATIVA_ATENDIMENTO {
+        int id_estimativa PK
+        int id_fila FK
+        int tempo_medio_minutos
+        datetime atualizado_em
+    }
+
+    HISTORICO_STATUS {
+        int id_historico PK
+        string entidade
+        int id_referencia
+        string status_anterior
+        string status_novo
+        datetime data_alteracao
+    }
+
+    %% RELACIONAMENTOS
 
     PESSOA ||--|| USUARIO : possui
     PESSOA ||--o| CLIENTE : pode_ser
     PESSOA ||--o| ATENDENTE : pode_ser
 
+    ATENDENTE ||--o{ ATENDENTE_FILA : atua_em
+    FILA ||--o{ ATENDENTE_FILA : possui
+
     CLIENTE ||--o{ AGENDAMENTO : solicita
     FILA ||--o{ AGENDAMENTO : organiza
     PRIORIDADE ||--o{ AGENDAMENTO : classifica
+    HORARIO_DISPONIVEL ||--o{ AGENDAMENTO : agenda
+
+    AGENDAMENTO ||--o| CHECKIN : gera
 
     CLIENTE ||--o{ ATENDIMENTO : recebe
     ATENDENTE ||--o{ ATENDIMENTO : realiza
     FILA ||--o{ ATENDIMENTO : organiza
     PRIORIDADE ||--o{ ATENDIMENTO : classifica
     AGENDAMENTO ||--o| ATENDIMENTO : origina
+
+    ATENDIMENTO ||--|| AVALIACAO : recebe
+
+    FILA ||--o{ SENHA : gera
+
+    USUARIO ||--o{ NOTIFICACAO : recebe
+
+    FILA ||--o{ ESTIMATIVA_ATENDIMENTO : possui
 ```
