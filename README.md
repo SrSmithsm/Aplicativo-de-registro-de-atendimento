@@ -87,7 +87,6 @@ Desenvolver uma base de dados robusta capaz de suportar:
 
 O sistema utiliza uma estrutura centralizada baseada na entidade **Pessoa**, evitando duplicidade de dados. O diagrama de entidade-relacionamento detalhando as conexões entre usuários, atendimentos e os novos módulos de inteligência está disponível no arquivo de modelagem anexo.
 
-*(Visualizar Diagrama ER no arquivo correspondente)*
 
 ---
 
@@ -109,24 +108,6 @@ Principais entidades:
 
 ---
 
-## Tecnologias
-
-* **Modelagem:** Mermaid (ER Diagram)
-* **Banco de Dados:** PostgreSQL
-* **Prototipagem:** Figma
-* **Ferramenta:** pgAdmin
-
----
-
-## Status do Projeto
-
-Estrutura concluída:
-* Modelagem completa do banco de dados
-* Implementação das tabelas de inovação (Inteligência de Dados)
-* Protótipo de interface desenvolvido no Figma
-* Pronto para testes no pgAdmin
-
----
 
 ## Observações
 
